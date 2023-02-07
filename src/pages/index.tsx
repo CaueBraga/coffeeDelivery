@@ -1,9 +1,10 @@
 import { Header } from "@/components/Header";
-import { Card } from "@/components/Card";
+import { Cards } from "@/components/Cards";
 import Image from "next/image";
 import { ShoppingCart } from "phosphor-react";
 import styles from "@/styles/Home.module.css";
 import { text } from "node:stream/consumers";
+import { useState } from "react";
 
 export default function Home() {
   const CoffeeCards = [
@@ -99,6 +100,7 @@ export default function Home() {
       id: "12",
     },
   ];
+
   return (
     <div className=" max-w-5xl mx-auto my-10">
       <Header />
@@ -107,7 +109,7 @@ export default function Home() {
 
       <div className="flex flex-wrap gap-2 ">
         {CoffeeCards.map((card) => (
-          <Card
+          <Cards
             key={card.id}
             coffee={card.coffee}
             type={card.type}

@@ -1,8 +1,9 @@
 import Shopping from "@/pages/shopping/[route]/index";
-import Head from "next/head";
+
 import Link from "next/link";
 import Image from "next/image";
 import { MapPin, ShoppingCart, Timer, Package, Coffee } from "phosphor-react";
+import { useState } from "react";
 
 export function Header(): JSX.Element {
   return (

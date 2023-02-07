@@ -1,5 +1,3 @@
-import { useRouter } from "next/router";
-
-export default function Shopping() {
+export default function Shopping(): JSX.Element {
   return <div>helo world</div>;
 }
