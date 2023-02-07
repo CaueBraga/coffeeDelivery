@@ -1,8 +1,10 @@
+import Shopping from "@/pages/shopping/[route]/index";
 import Head from "next/head";
+import Link from "next/link";
 import Image from "next/image";
 import { MapPin, ShoppingCart, Timer, Package, Coffee } from "phosphor-react";
 
-export function Header() {
+export function Header(): JSX.Element {
   return (
     <>
       <header className="flex justify-between w-full">
@@ -12,13 +14,26 @@ export function Header() {
             <MapPin className="mr-3 text-purple-300 w-5 h-5" weight="fill" />{" "}
             <div>Porto Alegre, RS</div>
           </div>
-          <div className="bg-yellow-100 p-2 rounded">
-            <ShoppingCart
-              weight="fill"
-              color="#C47F17"
-              width={22}
-              height={22}
-            />
+
+          <div className="relative">
+            <div className="bg-yellow-500 rounded-full w-5 h-5 text-center absolute p-2 -top-3 left-6 flex items-center justify-center ">
+              0
+            </div>
+            <Link
+              href={{
+                pathname: `/shopping/[route]`,
+                query: { route: "14" },
+              }}
+            >
+              <div className="bg-yellow-100 p-2 rounded">
+                <ShoppingCart
+                  weight="fill"
+                  color="#C47F17"
+                  width={22}
+                  height={22}
+                />
+              </div>
+            </Link>
           </div>
         </div>
       </header>
@@ -70,7 +85,7 @@ export function Header() {
           </div>
         </div>
 
-        <Image width={476} height={360} src="/Coffe.png" alt="" />
+        <Image width={476} height={360} src="/main.png" alt="" />
       </div>
     </>
   );
