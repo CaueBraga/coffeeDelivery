@@ -1,11 +1,14 @@
-import Shopping from "@/pages/shopping/[route]/index";
+import Shopping from "@/pages/shopping/index";
 
 import Link from "next/link";
 import Image from "next/image";
 import { MapPin, ShoppingCart, Timer, Package, Coffee } from "phosphor-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CartContext } from "@/contexts/CartContext";
 
-export function Header({ cartItens }: any): JSX.Element {
+export function Header(): JSX.Element {
+  const { cartItens } = useContext(CartContext);
+
   function cartItensQuantity() {
     let total = 0;
     for (let i = 0; i < cartItens.length; i++) {
@@ -32,7 +35,7 @@ export function Header({ cartItens }: any): JSX.Element {
             <Link
               className="focus:shadow-none"
               href={{
-                pathname: `/shopping/[route]`,
+                pathname: `/shopping`,
                 query: { route: "14" },
               }}
             >

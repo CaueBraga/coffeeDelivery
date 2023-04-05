@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { MapPin, ShoppingCart, Timer, Package, Coffee } from "phosphor-react";
+import { CartContext } from "@/contexts/CartContext";
+import { useContext, useState } from "react";
 
-import { useState } from "react";
-
-export function Cards({ coffee, type, title, text, price, addToCart }: any) {
+export function Cards({ coffee, type, title, text, price }: any) {
   const [counter, setCounter] = useState<number>(1);
-
+  const { addToCart } = useContext(CartContext);
   function handleCounterUp() {
     setCounter(counter + 1);
   }

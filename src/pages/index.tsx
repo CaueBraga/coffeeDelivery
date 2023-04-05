@@ -4,7 +4,8 @@ import Image from "next/image";
 import { ShoppingCart, Package, Timer, Coffee } from "phosphor-react";
 import styles from "@/styles/Home.module.css";
 import { text } from "node:stream/consumers";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CartContext } from "@/contexts/CartContext";
 
 const CoffeeCards = [
   {
@@ -113,24 +114,9 @@ const CoffeeCards = [
 ];
 
 export default function Home() {
-  const [cartItens, setCartItens] = useState<any[]>([]);
-
-  useEffect(() => {
-    const cartItensLocal = localStorage.getItem("cartItens") || "[]";
-
-    setCartItens(JSON.parse(cartItensLocal));
-  }, []);
-
-  function addToCart(item: any, quantity: number) {
-    const novoCartItens = [...cartItens, { item: item, quantity: quantity }];
-
-    setCartItens(novoCartItens);
-    localStorage.setItem("cartItens", JSON.stringify(novoCartItens));
-  }
-
   return (
     <div className=" max-w-5xl mx-auto my-10">
-      <Header cartItens={cartItens} />
+      <Header />
 
       <div className="flex justify-center items-center gap-10 font-roboto mt-10 w-full ">
         <div className="w-full">
@@ -192,7 +178,6 @@ export default function Home() {
             type={card.type}
             title={card.title}
             text={card.text}
-            addToCart={addToCart}
             price={card.price}
           />
         ))}

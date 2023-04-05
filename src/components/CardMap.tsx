@@ -1,15 +1,11 @@
+import { CartContext } from "@/contexts/CartContext";
 import Image from "next/image";
 import { Trash } from "phosphor-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
-export function CardMap({
-  coffee,
-  price,
-  title,
-  quantity,
-  cartItens,
-  setCartItens,
-}: any): JSX.Element {
+export function CardMap({ coffee, price, title, quantity }: any): JSX.Element {
+  const { cartItens, setCartItens } = useContext(CartContext);
+
   function handleDelete(): void {
     const newArray = cartItens.filter((item: any) => item.item.title !== title);
     setCartItens(newArray);

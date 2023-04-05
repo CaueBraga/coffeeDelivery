@@ -7,16 +7,17 @@ import {
   ShoppingCart,
   Timer,
 } from "phosphor-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Header } from "@/components/Header";
+import { CartContext } from "@/contexts/CartContext";
+
 export default function CheckOut(): JSX.Element {
   //const quadra = localStorage.getItem("quadraValue");
   //const numero = localStorage.getItem("numeroValue");
-
+  const { cartItens, setCartItens } = useContext(CartContext);
   const [adress, setAdress] = useState<any>("");
   const [formaDePagamento, setFormaDePagamento] = useState<any>("");
   const [total, setTotal] = useState<any>("");
-  const [cartItens, setCartItens] = useState<any>("");
 
   function getAdressArray() {
     if (!adress) {
@@ -27,16 +28,15 @@ export default function CheckOut(): JSX.Element {
   }
 
   useEffect(() => {
-    const cartItensLocal = localStorage.getItem("cartItens") || "[]";
     const parada = localStorage.getItem("adressValue") || "";
     const formaDePagamentoLocal =
       localStorage.getItem("formaDePagamento") || "";
     const totalLocal = localStorage.getItem("total") || "";
-    setCartItens(JSON.parse(cartItensLocal));
+
     setFormaDePagamento(formaDePagamentoLocal);
     setAdress(parada);
     setTotal(totalLocal);
-  }, []);
+  }, [cartItens, setCartItens]);
 
   function getFormaDePagamento() {
     if (formaDePagamento === "credit") {
@@ -52,15 +52,15 @@ export default function CheckOut(): JSX.Element {
 
   return (
     <div className=" max-w-5xl mx-auto my-10">
-      <Header cartItens={cartItens} />
+      <Header />
       <div className="mt-20 flex relative">
         <div>
           <div>
             <p className="text-4xl text-yellow-500 font-itim font-extrabold">
-              uhu! Pedido confirmado
+              Uhu! Pedido confirmado
             </p>
             <p className="text-xl">
-              Agora é só aguardar que logo café chegará ate você
+              Agora é só aguardar que logo o seu café chegará ate você
             </p>
           </div>
 
@@ -75,7 +75,7 @@ export default function CheckOut(): JSX.Element {
                   <div className="capitalize">
                     Em {getAdressArray()[0]}, {getAdressArray()[2]},{" "}
                     {getAdressArray()[1]}, {getAdressArray()[4]},{" "}
-                    {getAdressArray()[5]},
+                    {getAdressArray()[5]}
                   </div>
                 </div>
               </div>

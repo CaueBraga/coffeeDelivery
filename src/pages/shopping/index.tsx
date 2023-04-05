@@ -2,16 +2,15 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   MapPinLine,
-  MapPin,
-  ShoppingCart,
   CurrencyDollar,
   CreditCard,
   Money,
   Bank,
 } from "phosphor-react";
 import { CardMap } from "@/components/CardMap";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Header } from "@/components/Header";
+import { CartContext } from "@/contexts/CartContext";
 
 export default function Shopping(): JSX.Element {
   const [quadraValue, setQuadraValue] = useState<string>("");
@@ -21,14 +20,7 @@ export default function Shopping(): JSX.Element {
   const [cidadeValue, setCidadeValue] = useState<string>("");
   const [ufValue, setUfValue] = useState<string>("");
 
-  const [cartItens, setCartItens] = useState<any[]>([]);
-  const [quantity, setQuantity] = useState<number>(0);
-
-  useEffect(() => {
-    const cartItensLocal = localStorage.getItem("cartItens") || "[]";
-
-    setCartItens(JSON.parse(cartItensLocal));
-  }, []);
+  const { cartItens } = useContext(CartContext);
 
   function clickclick() {
     const adress = [
@@ -98,7 +90,7 @@ export default function Shopping(): JSX.Element {
 
   return (
     <div className=" max-w-5xl mx-auto my-10">
-      <Header cartItens={cartItens} />
+      <Header />
       <div className="flex mt-12">
         <form>
           <div className="mb-4 text-xl font-semibold font-itim">
@@ -226,8 +218,6 @@ export default function Shopping(): JSX.Element {
                   price={item.item.price}
                   quantity={item.quantity}
                   title={item.item.title}
-                  cartItens={cartItens}
-                  setCartItens={setCartItens}
                 />
               ))}
 
