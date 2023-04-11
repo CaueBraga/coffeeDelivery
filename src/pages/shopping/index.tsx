@@ -1,82 +1,47 @@
+import { useForm } from "react-hook-form";
 import Link from "next/link";
-import Image from "next/image";
-import {
-  MapPinLine,
-  CurrencyDollar,
-  CreditCard,
-  Money,
-  Bank,
-} from "phosphor-react";
+import { MapPinLine, CurrencyDollar, CreditCard, Money } from "phosphor-react";
 import { CardMap } from "@/components/CardMap";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Header } from "@/components/Header";
 import { CartContext } from "@/contexts/CartContext";
 
 export default function Shopping(): JSX.Element {
-  const [quadraValue, setQuadraValue] = useState<string>("");
-  const [numeroValue, setNumeroValue] = useState<string>("");
-  const [bairroValue, setBairroValue] = useState<string>("");
-  const [nomeValue, setNomeValue] = useState<string>("");
-  const [cidadeValue, setCidadeValue] = useState<string>("");
-  const [ufValue, setUfValue] = useState<string>("");
+  const {
+    cartItens,
+    setCepValue,
+    setBairroValue,
+    setCidadeValue,
+    setQuadraValue,
+    setNomeValue,
+    setUfValue,
+    setNumeroValue,
+    setTotalPrice,
+    setFormaDePagamento,
+  } = useContext(CartContext);
 
-  const { cartItens } = useContext(CartContext);
+  const { register, handleSubmit } = useForm();
 
-  function clickclick() {
-    const adress = [
-      quadraValue,
-      numeroValue,
-      bairroValue,
-      nomeValue,
-      cidadeValue,
-      ufValue,
-    ];
-    localStorage.setItem("adressValue", JSON.stringify(adress));
-    localStorage.setItem("total", JSON.stringify(cartItensSomQuantity() + 7.5));
+  function xxxxx(data: any) {
+    setCepValue(data.cep);
+    setBairroValue(data.bairro);
+    setCidadeValue(data.cidade);
+    setNomeValue(data.nome);
+    setUfValue(data.uf);
+    setQuadraValue(data.quadra);
+    setNumeroValue(data.numero);
   }
 
   function onClickCredito() {
-    localStorage.setItem("formaDePagamento", "credit");
+    setFormaDePagamento("credit");
   }
 
   function onClickDebito() {
-    localStorage.setItem("formaDePagamento", "debit");
+    setFormaDePagamento("debit");
   }
 
   function onClickDinheiro() {
-    localStorage.setItem("formaDePagamento", "money");
-  }
-
-  function onChangeUf(event: React.ChangeEvent<HTMLInputElement>) {
-    //localStorage.setItem("numeroValue", event.target.value);
-
-    setUfValue(event.target.value);
-  }
-
-  function onChangeCidade(event: React.ChangeEvent<HTMLInputElement>) {
-    //localStorage.setItem("numeroValue", event.target.value);
-
-    setCidadeValue(event.target.value);
-  }
-  function onChangeNome(event: React.ChangeEvent<HTMLInputElement>) {
-    //localStorage.setItem("numeroValue", event.target.value);
-
-    setNomeValue(event.target.value);
-  }
-  function onChangeBairro(event: React.ChangeEvent<HTMLInputElement>) {
-    //localStorage.setItem("numeroValue", event.target.value);
-
-    setBairroValue(event.target.value);
-  }
-  function onChangeNumero(event: React.ChangeEvent<HTMLInputElement>) {
-    //localStorage.setItem("numeroValue", event.target.value);
-
-    setNumeroValue(event.target.value);
-  }
-  function onChangeQuadra(event: React.ChangeEvent<HTMLInputElement>) {
-    //localStorage.setItem("quadraValue", event.target.value);
-
-    setQuadraValue(event.target.value);
+    setFormaDePagamento("money");
   }
 
   function cartItensSomQuantity() {
@@ -84,7 +49,7 @@ export default function Shopping(): JSX.Element {
     for (let i = 0; i < cartItens.length; i++) {
       total = total + cartItens[i].quantity * cartItens[i].item.price;
     }
-
+    setTotalPrice(total + 7.5);
     return total;
   }
 
@@ -92,7 +57,7 @@ export default function Shopping(): JSX.Element {
     <div className=" max-w-5xl mx-auto my-10">
       <Header />
       <div className="flex mt-12">
-        <form>
+        <form onSubmit={handleSubmit(xxxxx)}>
           <div className="mb-4 text-xl font-semibold font-itim">
             Complete seu pedido
           </div>
@@ -112,50 +77,55 @@ export default function Shopping(): JSX.Element {
             </div>
 
             <div className="flex flex-col gap-5 mt-7">
-              <input placeholder="CEP" type="text" />
               <input
-                onChange={onChangeQuadra}
-                value={quadraValue}
+                id="cep"
+                placeholder="CEP"
+                type="text"
+                {...register("cep")}
+              />
+              <input
+                id="quadra"
                 placeholder="Quadra/Rua"
                 type="text"
+                {...register("quadra")}
               />
 
               <div>
                 <input
-                  onChange={onChangeNumero}
-                  value={numeroValue}
                   className="mr-5"
+                  id="numero"
                   placeholder="Número"
                   type="text"
+                  {...register("numero")}
                 />
                 <input
-                  onChange={onChangeNome}
-                  value={nomeValue}
+                  id="nome"
                   placeholder="Nome Completo"
                   type="text"
+                  {...register("nome")}
                 />
               </div>
 
               <div className="flex justify-between">
                 <input
-                  onChange={onChangeBairro}
-                  value={bairroValue}
+                  id="bairro"
                   placeholder="Bairro"
                   type="text"
+                  {...register("bairro")}
                 />
                 <input
-                  onChange={onChangeCidade}
-                  value={cidadeValue}
+                  id="cidade"
                   className="w-64"
                   placeholder="Cidade"
                   type="text"
+                  {...register("cidade")}
                 />
                 <input
-                  onChange={onChangeUf}
-                  value={ufValue}
+                  id="uf"
                   className="w-16"
                   placeholder="UF"
                   type="text"
+                  {...register("uf")}
                 />
               </div>
             </div>
@@ -203,6 +173,7 @@ export default function Shopping(): JSX.Element {
               </button>
             </div>
           </div>
+          <button type="submit" className="w-4 h-4 bg-orange-400 p-14"></button>
         </form>
         <div className="ml-8">
           <div className="mb-4 text-xl font-semibold font-itim">
@@ -214,6 +185,7 @@ export default function Shopping(): JSX.Element {
               {cartItens.map((item: any) => (
                 // eslint-disable-next-line react/jsx-key
                 <CardMap
+                  key={item.item.id}
                   coffee={item.item.coffee}
                   price={item.item.price}
                   quantity={item.quantity}
@@ -244,7 +216,7 @@ export default function Shopping(): JSX.Element {
                   }}
                 >
                   <button
-                    onClick={clickclick}
+                    type="submit"
                     className="bg-yellow-300 text-white font-bold text-center mt-2 rounded uppercase w-96 h-9 px-3 py-1"
                   >
                     Confirmar pedido
@@ -259,18 +231,7 @@ export default function Shopping(): JSX.Element {
   );
 }
 
-// passar o valor dos inputs pra terceira pagina
-// passar o valor dos botoes
-//detalhes de css
-// como fazer pra usar livremente o item.item.price por exemplo. posso criar uma constante pra ele uma funcao pra setar ele ?
-// botar o focus com borda roxa
-// perguntar como tira a borda de focus de algum botao especifico
-// perguntar sobre o adress sublinhado
 //botar o link da home na logo
-// melhor jeito de fazer os botoes
 // responsivo
-// typar direito com as interfaces
-// componentizar mais coisas
-
-//perguntar sobre essa lombra da pagina bugar quando carrega ? e como se resolveria com local storage
-//como usar locoal storage prasalvar a bolinha do carrinho
+// typar
+// botar o qye for preciso no loaclstorage

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MapPin, ShoppingCart, Timer, Package, Coffee } from "phosphor-react";
+import { ShoppingCart } from "phosphor-react";
 import { CartContext } from "@/contexts/CartContext";
 import { useContext, useState } from "react";
 

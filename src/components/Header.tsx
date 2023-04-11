@@ -1,5 +1,3 @@
-import Shopping from "@/pages/shopping/index";
-
 import Link from "next/link";
 import Image from "next/image";
 import { MapPin, ShoppingCart, Timer, Package, Coffee } from "phosphor-react";

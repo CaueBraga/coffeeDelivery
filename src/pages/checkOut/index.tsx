@@ -1,42 +1,20 @@
-import Link from "next/link";
 import Image from "next/image";
-import {
-  CurrencyDollar,
-  MapPin,
-  Money,
-  ShoppingCart,
-  Timer,
-} from "phosphor-react";
-import { useContext, useEffect, useState } from "react";
+import { CurrencyDollar, MapPin, Timer } from "phosphor-react";
+import { useContext } from "react";
 import { Header } from "@/components/Header";
 import { CartContext } from "@/contexts/CartContext";
 
 export default function CheckOut(): JSX.Element {
-  //const quadra = localStorage.getItem("quadraValue");
-  //const numero = localStorage.getItem("numeroValue");
-  const { cartItens, setCartItens } = useContext(CartContext);
-  const [adress, setAdress] = useState<any>("");
-  const [formaDePagamento, setFormaDePagamento] = useState<any>("");
-  const [total, setTotal] = useState<any>("");
-
-  function getAdressArray() {
-    if (!adress) {
-      return [];
-    }
-
-    return JSON.parse(adress);
-  }
-
-  useEffect(() => {
-    const parada = localStorage.getItem("adressValue") || "";
-    const formaDePagamentoLocal =
-      localStorage.getItem("formaDePagamento") || "";
-    const totalLocal = localStorage.getItem("total") || "";
-
-    setFormaDePagamento(formaDePagamentoLocal);
-    setAdress(parada);
-    setTotal(totalLocal);
-  }, [cartItens, setCartItens]);
+  const {
+    bairroValue,
+    cidadeValue,
+    quadraValue,
+    nomeValue,
+    ufValue,
+    numeroValue,
+    totalPrice,
+    formaDePagamento,
+  } = useContext(CartContext);
 
   function getFormaDePagamento() {
     if (formaDePagamento === "credit") {
@@ -60,7 +38,7 @@ export default function CheckOut(): JSX.Element {
               Uhu! Pedido confirmado
             </p>
             <p className="text-xl">
-              Agora é só aguardar que logo o seu café chegará ate você
+              Agora é só aguardar que logo o seu café chegará até você
             </p>
           </div>
 
@@ -71,11 +49,10 @@ export default function CheckOut(): JSX.Element {
                   <MapPin weight="fill" color="white" />
                 </div>
                 <div>
-                  <div>Entrega para {getAdressArray()[3]},</div>
+                  <div>Entrega para {nomeValue},</div>
                   <div className="capitalize">
-                    Em {getAdressArray()[0]}, {getAdressArray()[2]},{" "}
-                    {getAdressArray()[1]}, {getAdressArray()[4]},{" "}
-                    {getAdressArray()[5]}
+                    Em {quadraValue}, {bairroValue}, {numeroValue},{" "}
+                    {cidadeValue}, {ufValue}
                   </div>
                 </div>
               </div>
@@ -96,7 +73,7 @@ export default function CheckOut(): JSX.Element {
                   <div>Pagamento na entrega</div>
                   <div>
                     {getFormaDePagamento()}{" "}
-                    <span className="font-normal text-base"> R$ {total} </span>
+                    <span className="font-normal text-base">{`${totalPrice}`}</span>
                   </div>
                 </div>
               </div>

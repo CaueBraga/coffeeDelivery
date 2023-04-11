@@ -1,7 +1,7 @@
 import { CartContext } from "@/contexts/CartContext";
 import Image from "next/image";
 import { Trash } from "phosphor-react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 export function CardMap({ coffee, price, title, quantity }: any): JSX.Element {
   const { cartItens, setCartItens } = useContext(CartContext);
