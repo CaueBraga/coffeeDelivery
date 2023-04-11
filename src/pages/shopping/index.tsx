@@ -1,12 +1,14 @@
 import { useForm } from "react-hook-form";
-import Link from "next/link";
 import { MapPinLine, CurrencyDollar, CreditCard, Money } from "phosphor-react";
 import { CardMap } from "@/components/CardMap";
 import { useContext } from "react";
 import { Header } from "@/components/Header";
 import { CartContext } from "@/contexts/CartContext";
+import { useRouter } from "next/router";
 
 export default function Shopping(): JSX.Element {
+  const router = useRouter();
+
   const {
     cartItens,
     setCepValue,
@@ -22,7 +24,7 @@ export default function Shopping(): JSX.Element {
 
   const { register, handleSubmit } = useForm();
 
-  function xxxxx(data: any) {
+  function submit(data: any) {
     setCepValue(data.cep);
     setBairroValue(data.bairro);
     setCidadeValue(data.cidade);
@@ -30,6 +32,7 @@ export default function Shopping(): JSX.Element {
     setUfValue(data.uf);
     setQuadraValue(data.quadra);
     setNumeroValue(data.numero);
+    router.push("/checkOut");
   }
 
   function onClickCredito() {
@@ -57,7 +60,7 @@ export default function Shopping(): JSX.Element {
     <div className=" max-w-5xl mx-auto my-10">
       <Header />
       <div className="flex mt-12">
-        <form onSubmit={handleSubmit(xxxxx)}>
+        <form onSubmit={handleSubmit(submit)}>
           <div className="mb-4 text-xl font-semibold font-itim">
             Complete seu pedido
           </div>
@@ -173,59 +176,51 @@ export default function Shopping(): JSX.Element {
               </button>
             </div>
           </div>
-          <button type="submit" className="w-4 h-4 bg-orange-400 p-14"></button>
-        </form>
-        <div className="ml-8">
-          <div className="mb-4 text-xl font-semibold font-itim">
-            Cafés selecionados
-          </div>
+          <div className="ml-8 absolute right-36 top-32">
+            <div className="mb-4 text-xl font-semibold font-itim">
+              Cafés selecionados
+            </div>
 
-          <div>
-            <div className="bg-base-300 rounded-lg w-[448px] h-[498]">
-              {cartItens.map((item: any) => (
-                // eslint-disable-next-line react/jsx-key
-                <CardMap
-                  key={item.item.id}
-                  coffee={item.item.coffee}
-                  price={item.item.price}
-                  quantity={item.quantity}
-                  title={item.item.title}
-                />
-              ))}
+            <div>
+              <div className="bg-base-300 rounded-lg w-[448px] h-[498]">
+                {cartItens.map((item: any) => (
+                  // eslint-disable-next-line react/jsx-key
+                  <CardMap
+                    key={item.item.id}
+                    coffee={item.item.coffee}
+                    price={item.item.price}
+                    quantity={item.quantity}
+                    title={item.item.title}
+                  />
+                ))}
 
-              <div className="flex flex-col px-10 py-6 gap-2">
-                <div className="flex justify-between text-sm">
-                  <div>Total de itens</div>
-                  <div>
-                    <div>R$ {cartItensSomQuantity()}</div>
+                <div className="flex flex-col px-10 py-6 gap-2">
+                  <div className="flex justify-between text-sm">
+                    <div>Total de itens</div>
+                    <div>
+                      <div>R$ {cartItensSomQuantity()}</div>
+                    </div>
                   </div>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <div>Entrega</div>
-                  <div>R$ 7.50</div>
-                </div>
-                <div className="flex  justify-between text-base font-bold">
-                  <div>Total</div>
-                  <div>R$ {cartItensSomQuantity() + 7.5}</div>
-                </div>
+                  <div className="flex justify-between text-sm">
+                    <div>Entrega</div>
+                    <div>R$ 7.50</div>
+                  </div>
+                  <div className="flex  justify-between text-base font-bold">
+                    <div>Total</div>
+                    <div>R$ {cartItensSomQuantity() + 7.5}</div>
+                  </div>
 
-                <Link
-                  href={{
-                    pathname: `/checkOut`,
-                    query: { route: "15" },
-                  }}
-                >
                   <button
                     type="submit"
                     className="bg-yellow-300 text-white font-bold text-center mt-2 rounded uppercase w-96 h-9 px-3 py-1"
                   >
                     Confirmar pedido
                   </button>
-                </Link>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
