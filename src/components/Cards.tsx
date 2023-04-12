@@ -2,12 +2,14 @@ import Image from "next/image";
 import { ShoppingCart } from "phosphor-react";
 import { CartContext } from "@/contexts/CartContext";
 import { useContext, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface CardsProps {
   coffee: string;
   price: number;
   title: string;
-  type: [];
+  type: string[];
   text: string;
 }
 
@@ -32,10 +34,15 @@ export function Cards({ coffee, type, title, text, price }: CardsProps) {
       },
       counter
     );
+
+    setCounter(1);
+    toast.success(`${title} 
+    "adicionado ao carrinho"`);
   }
 
   return (
     <>
+      <ToastContainer theme="colored" autoClose={1800} />
       <div className="w-64 h-80  bg-base-500 rounded-tl-md mt-14 rounded-tr-3xl rounded-br-md rounded-bl-3xl  flex flex-col items-center mr-4">
         <Image className="-mt-5" width={100} height={100} src={coffee} alt="" />
 
@@ -74,7 +81,7 @@ export function Cards({ coffee, type, title, text, price }: CardsProps) {
 
             <button
               onClick={handleAddToCart}
-              className="p-2 focus:disabled:border bg-purple-300 rounded"
+              className="p-2 focus:disabled:border bg-purple-300  hover:bg-purple-500 rounded"
             >
               <ShoppingCart size={20} weight="fill" color="white" />
             </button>

@@ -48,6 +48,7 @@ export function CardMap({
             <div className="flex mt-2">
               <div className=" mr-4 flex items-center justify-between text-xl text-purple-300 bg-base-700 p-2 w-16 h-9 rounded-md">
                 <button
+                  type="button"
                   className="focus:shadow-none"
                   onClick={() => handleCounterDown(title)}
                 >
@@ -56,6 +57,7 @@ export function CardMap({
                 </button>
                 <div>{quantity}</div>
                 <button
+                  type="button"
                   className="focus:shadow-none"
                   onClick={() => handleCounterUp(title)}
                 >
@@ -64,6 +66,7 @@ export function CardMap({
                 </button>
               </div>
               <button
+                type="button"
                 onClick={handleDelete}
                 className=" flex items-center gap-2 p-2 uppercase text-xs  text-purple-300 bg-base-700 w-24 h-9 rounded-md"
               >

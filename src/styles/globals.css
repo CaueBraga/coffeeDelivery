@@ -13,3 +13,7 @@ input {
   outline: transparent;
   box-shadow: 0 0 0 2px purple;
 }
+
+.Toastify__toast {
+  background: #8047f8 !important;
+}
