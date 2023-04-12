@@ -60,123 +60,130 @@ export default function Shopping(): JSX.Element {
     <div className=" max-w-5xl mx-auto my-10">
       <Header />
       <div className="flex mt-12">
-        <form onSubmit={handleSubmit(submit)}>
-          <div className="mb-4 text-xl font-semibold font-itim">
-            Complete seu pedido
-          </div>
-          <div className="bg-base-300 rounded-lg w-[640px] h-96 p-10 ">
-            <div>
-              <div className="flex items-center">
-                <MapPinLine
-                  className="text-yellow-500"
-                  width={22}
-                  height={22}
-                />
-                <p className="ml-3 font-semibold">Endereço de entrega</p>
-              </div>
-              <p className="ml-9 text-sm">
-                informe o endereco onde deseja receber seu pedido
-              </p>
+        <form
+          className=" flex flex-col md:flex-row"
+          onSubmit={handleSubmit(submit)}
+        >
+          <div>
+            <div className="mb-4 text-xl font-semibold font-itim">
+              Complete seu pedido
             </div>
-
-            <div className="flex flex-col gap-5 mt-7">
-              <input
-                id="cep"
-                placeholder="CEP"
-                type="text"
-                {...register("cep")}
-              />
-              <input
-                id="quadra"
-                placeholder="Quadra/Rua"
-                type="text"
-                {...register("quadra")}
-              />
-
+            <div className="bg-base-300 rounded-lg w-[640px] h-96 p-10 ">
               <div>
-                <input
-                  className="mr-5"
-                  id="numero"
-                  placeholder="Número"
-                  type="text"
-                  {...register("numero")}
-                />
-                <input
-                  id="nome"
-                  placeholder="Nome Completo"
-                  type="text"
-                  {...register("nome")}
-                />
+                <div className="flex items-center">
+                  <MapPinLine
+                    className="text-yellow-500"
+                    width={22}
+                    height={22}
+                  />
+                  <p className="ml-3 font-semibold">Endereço de entrega</p>
+                </div>
+                <p className="ml-9 text-sm">
+                  informe o endereco onde deseja receber seu pedido
+                </p>
               </div>
 
-              <div className="flex justify-between">
+              <div className="flex flex-col gap-5 mt-7">
                 <input
-                  id="bairro"
-                  placeholder="Bairro"
+                  id="cep"
+                  placeholder="CEP"
                   type="text"
-                  {...register("bairro")}
+                  {...register("cep")}
                 />
                 <input
-                  id="cidade"
-                  className="w-64"
-                  placeholder="Cidade"
+                  id="quadra"
+                  placeholder="Quadra/Rua"
                   type="text"
-                  {...register("cidade")}
+                  {...register("quadra")}
                 />
-                <input
-                  id="uf"
-                  className="w-16"
-                  placeholder="UF"
-                  type="text"
-                  {...register("uf")}
-                />
+
+                <div>
+                  <input
+                    className="mr-5"
+                    id="numero"
+                    placeholder="Número"
+                    type="text"
+                    {...register("numero")}
+                  />
+                  <input
+                    id="nome"
+                    placeholder="Nome Completo"
+                    type="text"
+                    {...register("nome")}
+                  />
+                </div>
+
+                <div className="flex justify-between">
+                  <input
+                    id="bairro"
+                    placeholder="Bairro"
+                    type="text"
+                    {...register("bairro")}
+                  />
+                  <input
+                    id="cidade"
+                    className="w-64"
+                    placeholder="Cidade"
+                    type="text"
+                    {...register("cidade")}
+                  />
+                  <input
+                    id="uf"
+                    className="w-16"
+                    placeholder="UF"
+                    type="text"
+                    {...register("uf")}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-base-300 rounded-lg w-[640px] h-52 mt-4 p-10">
+              <div>
+                <div className="flex items-center">
+                  <CurrencyDollar
+                    className="text-purple-300"
+                    width={22}
+                    height={22}
+                  />
+                  <p className="ml-3 font-semibold">Pagamento</p>
+                </div>
+                <p className="ml-8 text-sm">
+                  O pagamento é feito na entrega. Escolha a forma que deseja
+                  pagar
+                </p>
+              </div>
+
+              <div className="flex justify-between mt-5">
+                <button
+                  type="button"
+                  onClick={onClickCredito}
+                  className="w-44 h-12 rounded-md bg-base-700 flex items-center p-3 gap-3"
+                >
+                  <CreditCard className="text-purple-300" weight="bold" />
+                  <span>Cartão de crédito</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={onClickDebito}
+                  className="  w-44 h-12 rounded-md bg-base-700 flex items-center p-3 gap-3"
+                >
+                  <CreditCard className="text-purple-300" weight="bold" />
+                  <span>Cartão de débito</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={onClickDinheiro}
+                  className="w-44 h-12 rounded-md bg-base-700 flex items-center p-3 gap-3"
+                >
+                  <Money className="text-purple-300" weight="bold" />
+                  <span>Dinheiro</span>
+                </button>
               </div>
             </div>
           </div>
 
-          <div className="bg-base-300 rounded-lg w-[640px] h-52 mt-4 p-10">
-            <div>
-              <div className="flex items-center">
-                <CurrencyDollar
-                  className="text-purple-300"
-                  width={22}
-                  height={22}
-                />
-                <p className="ml-3 font-semibold">Pagamento</p>
-              </div>
-              <p className="ml-8 text-sm">
-                O pagamento é feito na entrega. Escolha a forma que deseja pagar
-              </p>
-            </div>
-
-            <div className="flex justify-between mt-5">
-              <button
-                type="button"
-                onClick={onClickCredito}
-                className="w-44 h-12 rounded-md bg-base-700 flex items-center p-3 gap-3"
-              >
-                <CreditCard className="text-purple-300" weight="bold" />
-                <span>Cartão de crédito</span>
-              </button>
-              <button
-                type="button"
-                onClick={onClickDebito}
-                className="  w-44 h-12 rounded-md bg-base-700 flex items-center p-3 gap-3"
-              >
-                <CreditCard className="text-purple-300" weight="bold" />
-                <span>Cartão de débito</span>
-              </button>
-              <button
-                type="button"
-                onClick={onClickDinheiro}
-                className="w-44 h-12 rounded-md bg-base-700 flex items-center p-3 gap-3"
-              >
-                <Money className="text-purple-300" weight="bold" />
-                <span>Dinheiro</span>
-              </button>
-            </div>
-          </div>
-          <div className="ml-8 absolute right-36 top-32">
+          <div className="ml-8 ">
             <div className="mb-4 text-xl font-semibold font-itim">
               Cafés selecionados
             </div>

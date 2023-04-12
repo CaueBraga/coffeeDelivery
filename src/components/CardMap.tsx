@@ -3,7 +3,19 @@ import Image from "next/image";
 import { Trash } from "phosphor-react";
 import { useContext } from "react";
 
-export function CardMap({ coffee, price, title, quantity }: any): JSX.Element {
+interface CardMapProps {
+  coffee: string;
+  price: number;
+  title: string;
+  quantity: number;
+}
+
+export function CardMap({
+  coffee,
+  price,
+  title,
+  quantity,
+}: CardMapProps): JSX.Element {
   const { cartItens, setCartItens } = useContext(CartContext);
 
   function handleDelete(): void {

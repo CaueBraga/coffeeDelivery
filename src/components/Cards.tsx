@@ -3,7 +3,15 @@ import { ShoppingCart } from "phosphor-react";
 import { CartContext } from "@/contexts/CartContext";
 import { useContext, useState } from "react";
 
-export function Cards({ coffee, type, title, text, price }: any) {
+interface CardsProps {
+  coffee: string;
+  price: number;
+  title: string;
+  type: [];
+  text: string;
+}
+
+export function Cards({ coffee, type, title, text, price }: CardsProps) {
   const [counter, setCounter] = useState<number>(1);
   const { addToCart } = useContext(CartContext);
   function handleCounterUp() {

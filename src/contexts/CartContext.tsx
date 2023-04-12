@@ -36,7 +36,7 @@ export function CartContextProvider({ children }: any) {
   const [nomeValue, setNomeValue] = useState<string>("");
   const [cidadeValue, setCidadeValue] = useState<string>("");
   const [ufValue, setUfValue] = useState<string>("");
-  const [formaDePagamento, setFormaDePagamento] = useState<any>("");
+  const [formaDePagamento, setFormaDePagamento] = useState<string>("");
   const [totalPrice, setTotalPrice] = useState<Number>(0);
 
   function addToCart(item: any, quantity: number) {
