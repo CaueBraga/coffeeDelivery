@@ -5,33 +5,23 @@ import { useContext } from "react";
 import { Header } from "@/components/Header";
 import { CartContext } from "@/contexts/CartContext";
 import { useRouter } from "next/router";
+import { couldStartTrivia } from "typescript";
 
 export default function Shopping(): JSX.Element {
   const router = useRouter();
 
   const {
     cartItens,
-    setCepValue,
-    setBairroValue,
-    setCidadeValue,
-    setQuadraValue,
-    setNomeValue,
-    setUfValue,
-    setNumeroValue,
+    setAddress,
     setTotalPrice,
     setFormaDePagamento,
+    formaDePagamento,
   } = useContext(CartContext);
 
   const { register, handleSubmit } = useForm();
 
   function submit(data: any) {
-    setCepValue(data.cep);
-    setBairroValue(data.bairro);
-    setCidadeValue(data.cidade);
-    setNomeValue(data.nome);
-    setUfValue(data.uf);
-    setQuadraValue(data.quadra);
-    setNumeroValue(data.numero);
+    setAddress(data);
     router.push("/checkOut");
   }
 
@@ -96,7 +86,6 @@ export default function Shopping(): JSX.Element {
                   type="text"
                   {...register("quadra")}
                 />
-
                 <div>
                   <input
                     className="mr-5"
@@ -112,7 +101,6 @@ export default function Shopping(): JSX.Element {
                     {...register("nome")}
                   />
                 </div>
-
                 <div className="flex justify-between">
                   <input
                     id="bairro"
@@ -218,8 +206,9 @@ export default function Shopping(): JSX.Element {
                   </div>
 
                   <button
+                    disabled={!formaDePagamento}
                     type="submit"
-                    className="bg-yellow-300 text-white font-bold text-center mt-2 rounded uppercase w-96 h-9 px-3 py-1"
+                    className="bg-yellow-300  text-white font-bold text-center mt-2 rounded uppercase w-96 h-9 px-3 py-1 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     Confirmar pedido
                   </button>
@@ -233,7 +222,7 @@ export default function Shopping(): JSX.Element {
   );
 }
 
-//botar o link da home na logo
 // responsivo
-// typar
 // botar o qye for preciso no loaclstorage
+
+// deixar clean com o adrress como vitor fez

@@ -5,16 +5,7 @@ import { Header } from "@/components/Header";
 import { CartContext } from "@/contexts/CartContext";
 
 export default function CheckOut(): JSX.Element {
-  const {
-    bairroValue,
-    cidadeValue,
-    quadraValue,
-    nomeValue,
-    ufValue,
-    numeroValue,
-    totalPrice,
-    formaDePagamento,
-  } = useContext(CartContext);
+  const { address, totalPrice, formaDePagamento } = useContext(CartContext);
 
   function getFormaDePagamento() {
     if (formaDePagamento === "credit") {
@@ -49,10 +40,10 @@ export default function CheckOut(): JSX.Element {
                   <MapPin weight="fill" color="white" />
                 </div>
                 <div>
-                  <div>Entrega para {nomeValue},</div>
+                  <div>Entrega para {address.nome},</div>
                   <div className="capitalize">
-                    Em {quadraValue}, {bairroValue}, {numeroValue},{" "}
-                    {cidadeValue}, {ufValue}
+                    Em {address.quadra}, {address.bairro}, {address.numero},{" "}
+                    {address.cidade}, {address.uf}
                   </div>
                 </div>
               </div>
@@ -73,7 +64,7 @@ export default function CheckOut(): JSX.Element {
                   <div>Pagamento na entrega</div>
                   <div>
                     {getFormaDePagamento()}{" "}
-                    <span className="font-normal text-base">{`${totalPrice}`}</span>
+                    <span className="font-normal text-base">{`$ ${totalPrice}`}</span>
                   </div>
                 </div>
               </div>

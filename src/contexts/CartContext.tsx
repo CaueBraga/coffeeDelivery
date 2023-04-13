@@ -4,38 +4,29 @@ interface CartContextType {
   cartItens: [] | any;
   addToCart: (arg1: any, arg2: number) => void;
   setCartItens: Function;
-  setCepValue: Function;
-  setQuadraValue: Function;
-  setNumeroValue: Function;
-  setBairroValue: Function;
-  setNomeValue: Function;
-  setCidadeValue: Function;
-  setUfValue: Function;
-  setFormaDePagamento: Function;
-  setTotalPrice: Function;
-  cepValue: String;
-  bairroValue: String;
-  cidadeValue: String;
-  quadraValue: String;
-  nomeValue: String;
-  ufValue: String;
-  numeroValue: String;
   totalPrice: Number;
   formaDePagamento: String;
+  setFormaDePagamento: Function;
+  setTotalPrice: Function;
+  setAddress: Function;
+  address:
+    | {
+        bairro: String;
+        cep: String;
+        cidade: String;
+        nome: String;
+        numero: String;
+        quadra: String;
+        uf: String;
+      }
+    | any;
 }
 
 export const CartContext = createContext({} as CartContextType);
 
 export function CartContextProvider({ children }: any) {
   const [cartItens, setCartItens] = useState<any[]>([]);
-
-  const [cepValue, setCepValue] = useState<string>("");
-  const [quadraValue, setQuadraValue] = useState<string>("");
-  const [numeroValue, setNumeroValue] = useState<string>("");
-  const [bairroValue, setBairroValue] = useState<string>("");
-  const [nomeValue, setNomeValue] = useState<string>("");
-  const [cidadeValue, setCidadeValue] = useState<string>("");
-  const [ufValue, setUfValue] = useState<string>("");
+  const [address, setAddress] = useState<any[]>([]);
   const [formaDePagamento, setFormaDePagamento] = useState<string>("");
   const [totalPrice, setTotalPrice] = useState<Number>(0);
 
@@ -51,24 +42,12 @@ export function CartContextProvider({ children }: any) {
           cartItens,
           addToCart,
           setCartItens,
-          setCepValue,
-          setBairroValue,
-          setCidadeValue,
-          setNomeValue,
-          setNumeroValue,
-          setUfValue,
-          setQuadraValue,
           setFormaDePagamento,
           setTotalPrice,
-          bairroValue,
-          cepValue,
-          cidadeValue,
           formaDePagamento,
-          nomeValue,
-          numeroValue,
-          quadraValue,
           totalPrice,
-          ufValue,
+          address,
+          setAddress,
         }}
       >
         {children}

@@ -42,7 +42,7 @@ export function Cards({ coffee, type, title, text, price }: CardsProps) {
 
   return (
     <>
-      <ToastContainer theme="colored" autoClose={1800} />
+      <ToastContainer theme="colored" autoClose={1300} />
       <div className="w-64 h-80  bg-base-500 rounded-tl-md mt-14 rounded-tr-3xl rounded-br-md rounded-bl-3xl  flex flex-col items-center mr-4">
         <Image className="-mt-5" width={100} height={100} src={coffee} alt="" />
 
@@ -68,7 +68,11 @@ export function Cards({ coffee, type, title, text, price }: CardsProps) {
 
           <div className="flex items-center">
             <div className=" mr-4 flex items-center justify-between text-xl text-purple-300 bg-base-700 p-2 w-16 h-9 rounded-md">
-              <button className="focus:shadow-none" onClick={handleCounterDown}>
+              <button
+                disabled={counter === 1}
+                className="focus:shadow-none"
+                onClick={handleCounterDown}
+              >
                 {" "}
                 -{" "}
               </button>

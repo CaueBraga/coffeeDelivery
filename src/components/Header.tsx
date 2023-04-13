@@ -19,7 +19,14 @@ export function Header(): JSX.Element {
   return (
     <>
       <header className="flex justify-between w-full">
-        <Image width={85} height={40} src="/Logo.svg" alt="" />
+        <Link
+          className="focus:shadow-none"
+          href={{
+            pathname: `/`,
+          }}
+        >
+          <Image width={85} height={40} src="/Logo.svg" alt="" />
+        </Link>
         <div className="flex items-center">
           <div className="flex items-center mr-4 bg-purple-100 p-2 rounded">
             <MapPin className="mr-3 text-purple-300 w-5 h-5" weight="fill" />{" "}

@@ -48,6 +48,7 @@ export function CardMap({
             <div className="flex mt-2">
               <div className=" mr-4 flex items-center justify-between text-xl text-purple-300 bg-base-700 p-2 w-16 h-9 rounded-md">
                 <button
+                  disabled={quantity === 1}
                   type="button"
                   className="focus:shadow-none"
                   onClick={() => handleCounterDown(title)}
